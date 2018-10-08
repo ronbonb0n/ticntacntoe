@@ -1,0 +1,152 @@
+#xo games
+from time import sleep
+
+a1 = [[ 0, 0, 0],[ 0, 0, 0],[0 ,0 , 0]]
+playerturn = 2
+turns = 1
+loopend = False
+#--------------------------------Clear Screen. Call by clear()-----------------------------------
+def clear():
+    print ("\n" * 50)
+#---------------------------------Visual Representation. Call by game()---------------------------
+def game() :
+    
+    for i in a1:
+        print (i)
+    print ("\n\n\n")
+#--------------------------------Switch Players. Call by switch_players()---------------------------------
+def switch_players(x):
+    if x == 1:
+        y = 2
+    if x == 2:
+        y = 1
+    return y
+#-------------------------------------------------check turns---------------------------------------------
+def checkturns(turns):
+    if turns == 10:
+        print("Game Draw")
+        return True
+#-------------------------------Game Progress matrix------------------------------------------------
+def gamepro(play) :
+    if playerturn == 1:
+        if play == 1:
+            a1[0][0] = "X"
+        elif play == 2:
+            a1[0][1] = "X"
+        elif play == 3:
+            a1[0][2] = "X"
+        elif play == 4:
+            a1[1][0] = "X"
+        elif play == 5:
+            a1[1][1] = "X"
+        elif play == 6:
+            a1[1][2] = "X"
+        elif play == 7:
+            a1[2][0] = "X"
+        elif play == 8:
+            a1[2][1] = "X"
+        elif play == 9:
+            a1[2][2] = "X"
+            
+    elif playerturn == 2:
+        if play == 1:
+            a1[0][0] = "O"
+        elif play == 2:
+            a1[0][1] = "O"
+        elif play == 3:
+            a1[0][2] = "O"
+        elif play == 4:
+            a1[1][0] = "O"
+        elif play == 5:
+            a1[1][1] = "O"
+        elif play == 6:
+            a1[1][2] = "O"
+        elif play == 7:
+            a1[2][0] = "O"
+        elif play == 8:
+            a1[2][1] = "O"
+        elif play == 9:
+            a1[2][2] = "O"
+
+#---------------------------------Check Input if Space is filled--------------------------------------
+def checkinput():
+    if play == 1:
+        if a1[0][0] != 0:
+            return True
+    elif play == 2:
+        if a1[0][1] != 0:
+            return True
+    elif play == 3:
+        if a1[0][2] != 0:
+            return True
+    elif play == 4:
+        if a1[1][0] != 0:
+            return True
+    elif play == 5:
+        if a1[1][1] != 0:
+            return True
+    elif play == 6:
+        if a1[1][2] != 0:
+            return True
+    elif play == 7:
+        if a1[2][0] != 0:
+            return True
+    elif play == 8:
+        if a1[2][1] != 0:
+            return True
+    elif play == 9:
+        if a1[2][2] != 0:
+            return True
+#-----------------------------------Win Check ---------------------------------------------------
+def WinCheck(a1,playerturn):
+    if a1[0][0]==a1[0][1]==a1[0][2]!= 0 or a1[1][0]==a1[1][1]==a1[1][2]!= 0 or a1[2][0]==a1[2][1]==a1[2][2]!= 0 or a1[0][0]==a1[1][0]==a1[2][0]!= 0 or a1[0][1]==a1[1][1]==a1[2][1]!= 0 or a1[0][2]==a1[1][2]==a1[2][2]!= 0 or a1[0][0]==a1[1][1]==a1[2][2]!= 0 or a1[0][2]==a1[1][1]==a1[2][0]!= 0 :
+        if playerturn == 1:
+            clear()
+            game()
+            for i in range(0,20):
+                print ("Player 1 wins!\n\n")
+                sleep(2)
+            return 1
+        elif playerturn == 2:
+            clear()
+            game()
+            for i in range(0,20):
+                print ("Player 2 wins!\n\n")
+                sleep(2)
+            return 2
+#-----------------------------------Game loop Intiation------------------------------------------------
+while turns <= 10 and loopend == False:
+    clear()
+#------------------------------------Turns count Verification-----------------
+    checktrue = checkturns(turns)
+    if checktrue == True:
+        break
+    #------------------------------------------Game Loop Termination-----------------------------------------
+
+#-----------------------------------Change Player-----------------------------
+    playerturn = switch_players(playerturn)
+#-------------------------------Display Game----------------------------------
+    
+    game()
+    print("\nTurn Number: ", turns, "\n1,2,3\n4,5,6\n7,8,9\n\nEnter cell number to play player", playerturn )
+
+
+#-------------------------------Get Input for playing-------------------------
+    play = int(input("==>  "))
+#----------------------------------Input Verification-------------------------
+    inputfilled = checkinput()
+    if inputfilled == True:
+        print("Space already filled re-enter")
+        continue
+    #------------------------------------------Game Loop Restart------------------------------------------
+
+#----------------------------------Game Matrix Update-------------------------
+    gamepro(play)
+    wincheck = WinCheck(a1,playerturn)
+    if wincheck == 1:
+        game()
+        break
+    elif wincheck == 2:
+        game()
+        break
+    turns+=1
