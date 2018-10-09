@@ -150,3 +150,5 @@ while turns <= 10 and loopend == False:
         game()
         break
     turns+=1
+    
+   #--------------------- heres a small change. hi rohan-------------------------
